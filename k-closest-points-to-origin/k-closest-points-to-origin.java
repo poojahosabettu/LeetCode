@@ -9,13 +9,8 @@ class Solution {
         }
         
         int[][] sol = new int[k][2];
-        int i = 0;
-        while(heap.size()>0){
-            int[] temp = heap.poll();
-            sol[i][0] = temp[0];
-            sol[i++][1] = temp[1];
-        }
-        
+        while(heap.size()>0)
+            sol[--k] = heap.poll();
         return sol;
     }
 }
