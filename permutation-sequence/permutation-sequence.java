@@ -4,22 +4,26 @@ class Solution {
     String solution = "";
     public String getPermutation(int n, int k) {
         K = k;
-        getPermutation(n , "");
+        getPermutation(n , new StringBuilder());
         //return sol.get(k-1);
         return solution;
     }
     
-    public void getPermutation(int n,String val){
+    public void getPermutation(int n,StringBuilder val){
         if(K>0){
             if(n == val.length()){
                 --K;
                 if(K == 0)
-                    solution = val;
+                    solution = val.toString();
             } else{
                 for(int i = 1;i<=n;++i){
                     char c = (char)('0'+i);
-                    if(val.indexOf(c) == -1)
-                       getPermutation(n,val+c); 
+                    if(val.toString().indexOf(c) == -1){
+                        //System.out.println("Before "+val);
+                        getPermutation(n,val.append(c)); 
+                        val.delete(val.length()-1,val.length());
+                       // System.out.println("After "+val);
+                    }
                 }
             }
         }
