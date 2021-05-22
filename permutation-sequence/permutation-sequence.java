@@ -4,26 +4,25 @@ class Solution {
     String solution = "";
     public String getPermutation(int n, int k) {
         K = k;
-        getPermutation(n , new StringBuilder());
+        getPermutation(n , "", new boolean[n]);
         //return sol.get(k-1);
         return solution;
     }
     
-    public void getPermutation(int n,StringBuilder val){
+    public void getPermutation(int n,String val, boolean[] used){
         if(K>0){
             if(n == val.length()){
                 --K;
                 if(K == 0)
-                    solution = val.toString();
+                    solution = val;
             } else{
                 for(int i = 1;i<=n;++i){
+                    if(used[i-1])
+                        continue;
                     char c = (char)('0'+i);
-                    if(val.toString().indexOf(c) == -1){
-                        //System.out.println("Before "+val);
-                        getPermutation(n,val.append(c)); 
-                        val.delete(val.length()-1,val.length());
-                       // System.out.println("After "+val);
-                    }
+                    used[i-1] = true;
+                    getPermutation(n,val+c,used); 
+                    used[i-1] = false;
                 }
             }
         }
